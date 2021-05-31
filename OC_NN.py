@@ -120,20 +120,18 @@ data_test = data_test.round({'x-axis': 4, 'y-axis': 4, 'z-axis': 4})
 TIME_PERIODS = 5
 STEP_DISTANCE = 2
 LABEL = 'activity'
-x_train, y_train = split_x_y(data_train,TIME_PERIODS,STEP_DISTANCE,LABEL)
-x_test, y_test = split_x_y(data_test,TIME_PERIODS,STEP_DISTANCE,LABEL)
+
+x_train, y_train = data_train.iloc[:, 0:3] , data_train.iloc[:,4]
+x_test, y_test = data_test.iloc[:, 0:3] , data_test.iloc[:,4]
+
+#x_train, y_train = split_x_y(data_train,TIME_PERIODS,STEP_DISTANCE,LABEL)
+#x_test, y_test = split_x_y(data_test,TIME_PERIODS,STEP_DISTANCE,LABEL)
 
 # Set input & output dimensions
-num_time_periods, num_sensors = x_train.shape[1], x_train.shape[2]
+num_sensors = x_train.shape[1]
 num_classes = 2
 
-input_shape = (num_time_periods*num_sensors)
-x_train = x_train.reshape(x_train.shape[0], input_shape)
-
-num_time_periods, num_sensors = x_test.shape[1], x_test.shape[2]
-
-input_shape = (num_time_periods*num_sensors)
-x_test = x_test.reshape(x_test.shape[0], input_shape)
+input_shape = (num_sensors)
 
 x_train = x_train.astype('float32')
 y_train = y_train.astype('float32')
