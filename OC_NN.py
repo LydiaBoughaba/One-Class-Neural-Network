@@ -188,10 +188,9 @@ print("Test : ")
 model.evaluate(x_test,y_test)
 
 y_pred_test = model.predict(x_test)
-# Take the class with the highest probability from the test predictions
-max_y_pred_test = np.argmax(y_pred_test, axis=1)
-max_y_test = np.argmax(y_test, axis=1)
+y_pred_test = np.argmax(y_pred_test, axis=1)
+y_test = np.argmax(y_test, axis=1)
 
-show_confusion_matrix(max_y_test, max_y_pred_test)
+show_confusion_matrix(y_test, y_pred_test)
 
-print(classification_report(max_y_test, max_y_pred_test))
+print(classification_report(y_test, y_pred_test))
